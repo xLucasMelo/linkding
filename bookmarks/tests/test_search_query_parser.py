@@ -341,7 +341,38 @@ class SearchQueryTokenizerTest(TestCase):
         self.assertEqual(len(tokens), 1)
         self.assertEqual(tokens[0].type, TokenType.EOF)
 
+    def test_escaped_newline(self):
+        tokenizer = SearchQueryTokenizer(r'"hello\nworld"')
+        tokens = tokenizer.tokenize()
+        self.assertEqual(tokens[0].value, "hello\nworld")
 
+    def test_escaped_tab(self):
+        tokenizer = SearchQueryTokenizer(r'"hello\tworld"')
+        tokens = tokenizer.tokenize()
+        self.assertEqual(tokens[0].value, "hello\tworld")
+
+    def test_escaped_carriage_return(self):
+        tokenizer = SearchQueryTokenizer(r'"hello\rworld"')
+        tokens = tokenizer.tokenize()
+        self.assertEqual(tokens[0].value, "hello\rworld")
+
+    def test_escaped_backslash(self):
+        tokenizer = SearchQueryTokenizer(r'"file\\path"')
+        tokens = tokenizer.tokenize()
+        self.assertEqual(tokens[0].value, "file\\path")
+
+    def test_unknown_escape(self):
+        tokenizer = SearchQueryTokenizer(r'"test\x"')
+        tokens = tokenizer.tokenize()
+        self.assertEqual(tokens[0].value, "testx")
+
+    def test_empty_quoted_string(self):
+        tokenizer = SearchQueryTokenizer('""')
+        tokens = tokenizer.tokenize()
+        self.assertEqual(tokens[0].type, TokenType.TERM)
+        self.assertEqual(tokens[0].value, "")
+        self.assertEqual(tokens[1].type, TokenType.EOF)
+        
 class SearchQueryParserTest(TestCase):
     """Test cases for the search query parser."""
 
