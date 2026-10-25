@@ -1,0 +1,11 @@
+{
+  "base_commit": "dddd54b81fe5156ced0071f6b3cd00d074a2cd30",
+  "tests_commit": "0361cf7d0f56ff535fafc6bc7f3974020e91ec49",
+  "execution_date": "2026-10-25",
+  "note": "Coverage metadata records the base HEAD. New tests and runner were present as uncommitted files during execution; the files in tests_commit have identical content.",
+  "sha256": {
+    "bookmarks/services/wayback.py": "a1cc1bff74da7598aa6ef55024abfc2d76051cb7da564dd2279005931c3a78c0",
+    "bookmarks/tests/test_wayback.py": "15ca3f9625415a23f3d1dcf79d608a5515b56197d1dbc220e6e89effff28282f",
+    "scripts/run_wayback_coverage.py": "1459efc412add431522f02cc3b80e630091e7039c546bf4a8afb240a1cd00c6a"
+  }
+}

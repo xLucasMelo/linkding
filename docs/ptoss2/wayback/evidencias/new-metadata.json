@@ -1,0 +1,24 @@
+{
+  "phase": "new",
+  "exit_code": 0,
+  "pytest_args": [
+    "bookmarks/tests/test_wayback.py",
+    "-q",
+    "--tb=short",
+    "--color=no"
+  ],
+  "git_commit": "dddd54b81fe5156ced0071f6b3cd00d074a2cd30",
+  "python": "3.13.16 (main, Oct  3 2026, 01:04:41) [MSC v.1944 64 bit (AMD64)]",
+  "versions": {
+    "Django": "6.1.2",
+    "coverage": "7.16.2",
+    "pytest": "9.1.1",
+    "pytest-django": "4.14.0"
+  },
+  "test_settings": {
+    "huey": "SqliteHuey (temporary file)",
+    "background_tasks_disabled": false,
+    "test_database": ":memory:",
+    "password_hasher": "MD5PasswordHasher (tests only)"
+  }
+}

@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>Wayback — registro das execuções</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#18222d;background:white}h1{font-size:23px;margin:0 0 12px}p{font-size:13px;line-height:1.4}h2{font-size:17px;margin:16px 0 8px}section{border-top:1px solid #ccd4df;padding-top:3px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.5 Consolas,monospace;background:#f4f6f8;padding:12px}footer{font-size:11px;color:#526171;line-height:1.5}</style><h1>Wayback: registro das execuções reais</h1><p>25/10/2026 · Linkding 1.46.2 · base xLucasMelo/linkding @ dddd54b<br>generate_fallback_webarchive_url — Python 3.13 / Django 6.1.2 / coverage 7.16.2</p><section><h2>1. Suíte existente — antes dos novos testes</h2><pre>5 failed, 1295 passed, 1 error, 58 subtests passed in 110.46s (0:01:50)
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+bookmarks\services\wayback.py       8      2      4      2    67%   16, 18
+---------------------------------------------------------------------------
+TOTAL                               8      2      4      2    67%</pre></section><section><h2>2. Somente os 12 testes novos</h2><pre>Phase: new; pytest bookmarks/tests/test_wayback.py -q --tb=short --color=no
+.uu.uuuu..uuu...uuu.....                                                 [100%]
+12 passed, 12 subtests passed in 2.88s
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+bookmarks\services\wayback.py       8      0      4      0   100%
+---------------------------------------------------------------------------
+TOTAL                               8      0      4      0   100%</pre></section><footer>Captura do visualizador dos logs reais, sem simulação de terminal.<br>A cobertura do método passa de 3/5 linhas e 2/4 branches para 5/5 linhas e 4/4 branches. Os valores 67% e 100% acima combinam linhas e branches do arquivo inteiro.</footer>
