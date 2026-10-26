@@ -166,6 +166,15 @@ CASES = [
         "PE",
         "Path parameters preserved",
     ),
+    ("CP28", "file:///tmp/A/", "file:///tmp/A", "R2/R3", "PE", "Scheme with no host"),
+    (
+        "CP29",
+        "//EXAMPLE.COM/a/",
+        "//example.com/a",
+        "R2/R3",
+        "PE",
+        "Host with no scheme",
+    ),
 ]
 
 
