@@ -117,6 +117,31 @@ CASES = [
         "AVL",
         "Maximum parsed port",
     ),
+    (
+        "CP21",
+        " https://EXAMPLE.COM:65536/ ",
+        "https://EXAMPLE.COM:65536/",
+        "R6",
+        "AVL",
+        "Immediately above maximum; stripped fallback",
+    ),
+    (
+        "CP22",
+        "https://EXAMPLE.COM:-1/",
+        "https://EXAMPLE.COM:-1/",
+        "R6",
+        "AVL",
+        "Immediately below zero",
+    ),
+    (
+        "CP23",
+        "https://EXAMPLE.COM:abc/",
+        "https://EXAMPLE.COM:abc/",
+        "R6",
+        "PE",
+        "Nonnumeric port",
+    ),
+    ("CP24", "https://[::1", "https://[::1", "R6", "PE", "Unclosed IPv6 bracket"),
 ]
 
 
