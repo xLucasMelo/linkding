@@ -77,6 +77,30 @@ CASES = [
         "AVL",
         "Two unsorted parameters",
     ),
+    (
+        "CP16",
+        "https://example.com?a=z&a=a&a=a",
+        "https://example.com?a=a&a=a&a=z",
+        "R4",
+        "PE",
+        "Value tie-break and duplicate preservation",
+    ),
+    (
+        "CP17",
+        "https://example.com?b=&a",
+        "https://example.com?a=&b=",
+        "R4",
+        "PE",
+        "Blank values and key without equals",
+    ),
+    (
+        "CP18",
+        "https://example.com?q=a+b&plus=%2B",
+        "https://example.com?plus=%2B&q=a%20b",
+        "R4",
+        "PE",
+        "Space and literal plus differ",
+    ),
 ]
 
 
