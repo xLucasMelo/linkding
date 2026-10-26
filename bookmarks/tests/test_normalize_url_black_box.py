@@ -142,6 +142,30 @@ CASES = [
         "Nonnumeric port",
     ),
     ("CP24", "https://[::1", "https://[::1", "R6", "PE", "Unclosed IPv6 bracket"),
+    (
+        "CP25",
+        "HTTPS://User:PaSs@EXAMPLE.COM/P/#Frag",
+        "https://User:PaSs@example.com/P#Frag",
+        "R2/R5",
+        "PE",
+        "Credentials, path and fragment case",
+    ),
+    (
+        "CP26",
+        "https://User@EXAMPLE.COM",
+        "https://User@example.com",
+        "R5",
+        "PE",
+        "Username without password",
+    ),
+    (
+        "CP27",
+        "https://EXAMPLE.COM/p/;v=1?b=2&a=1#F",
+        "https://example.com/p;v=1?a=1&b=2#F",
+        "R3",
+        "PE",
+        "Path parameters preserved",
+    ),
 ]
 
 
