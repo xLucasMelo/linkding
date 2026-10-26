@@ -53,6 +53,30 @@ CASES = [
         "PE",
         "Internal slash must remain",
     ),
+    (
+        "CP13",
+        "https://EXAMPLE.COM",
+        "https://example.com",
+        "R4",
+        "AVL",
+        "Zero query parameters",
+    ),
+    (
+        "CP14",
+        "https://EXAMPLE.COM?b=2",
+        "https://example.com?b=2",
+        "R4",
+        "AVL",
+        "One query parameter",
+    ),
+    (
+        "CP15",
+        "https://EXAMPLE.COM?b=2&a=1",
+        "https://example.com?a=1&b=2",
+        "R4",
+        "AVL",
+        "Two unsorted parameters",
+    ),
 ]
 
 
