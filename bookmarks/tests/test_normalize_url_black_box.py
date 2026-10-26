@@ -21,6 +21,38 @@ CASES = [
     ("CP06", 0, "", "R1", "PE", "Falsy numeric input"),
     ("CP07", 42, "", "R1", "PE", "Truthy numeric input"),
     ("CP08", b"https://example.com", "", "R1", "PE", "Bytes are not strings"),
+    (
+        "CP09",
+        "https://EXAMPLE.COM/p",
+        "https://example.com/p",
+        "R3",
+        "AVL",
+        "Zero trailing slashes",
+    ),
+    (
+        "CP10",
+        "https://EXAMPLE.COM/p/",
+        "https://example.com/p",
+        "R3",
+        "AVL",
+        "One trailing slash",
+    ),
+    (
+        "CP11",
+        "https://EXAMPLE.COM/p//",
+        "https://example.com/p",
+        "R3",
+        "AVL",
+        "Two trailing slashes",
+    ),
+    (
+        "CP12",
+        "https://EXAMPLE.COM/a//b/",
+        "https://example.com/a//b",
+        "R3",
+        "PE",
+        "Internal slash must remain",
+    ),
 ]
 
 
