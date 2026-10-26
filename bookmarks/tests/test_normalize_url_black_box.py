@@ -17,6 +17,10 @@ CASES = [
         "PE",
         "External mixed whitespace",
     ),
+    ("CP05", None, "", "R1", "PE", "Absent nonstring input"),
+    ("CP06", 0, "", "R1", "PE", "Falsy numeric input"),
+    ("CP07", 42, "", "R1", "PE", "Truthy numeric input"),
+    ("CP08", b"https://example.com", "", "R1", "PE", "Bytes are not strings"),
 ]
 
 
