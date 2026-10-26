@@ -15,6 +15,11 @@ from bookmarks.utils import normalize_url
         pytest.param(
             "https://EXAMPLE.COM:0", "https://example.com:0", id="CP30-port-zero"
         ),
+        pytest.param(
+            "https://[2001:DB8::1]:443/",
+            "https://[2001:db8::1]:443",
+            id="CP31-ipv6-brackets",
+        ),
     ],
 )
 def test_normalize_url_contract_candidate(value, expected):
