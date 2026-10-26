@@ -36,3 +36,13 @@ def test_normalize_url_mcdc(value, expected, b_evaluated, parser_called):
         assert normalize_url(value) == expected
     assert type_check.call_count == int(b_evaluated)
     assert parser.call_count == int(parser_called)
+
+
+def test_normalize_url_CB01_attribute_error_returns_stripped_input():
+    # Fault injection: verify defensive handling, not a naturally observed input bug.
+    value = "  HTTPS://EXAMPLE.COM/path/  "
+    with patch(
+        "bookmarks.utils.urllib.parse.urlparse",
+        side_effect=AttributeError("injected parser failure"),
+    ):
+        assert normalize_url(value) == "HTTPS://EXAMPLE.COM/path/"
