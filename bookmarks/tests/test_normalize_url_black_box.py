@@ -101,6 +101,22 @@ CASES = [
         "PE",
         "Space and literal plus differ",
     ),
+    (
+        "CP19",
+        "https://EXAMPLE.COM:1",
+        "https://example.com:1",
+        "R5",
+        "AVL",
+        "Immediately above zero",
+    ),
+    (
+        "CP20",
+        "https://EXAMPLE.COM:65535",
+        "https://example.com:65535",
+        "R5",
+        "AVL",
+        "Maximum parsed port",
+    ),
 ]
 
 
