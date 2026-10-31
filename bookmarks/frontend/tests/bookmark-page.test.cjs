@@ -150,3 +150,36 @@ test("cycle 9: opens one selected bookmark synchronously without posting or copy
   f.element.onBulkActionChange();
   assert.equal(f.acrossClasses.has("d-none"), false);
 });
+
+test("cycle 10: opens all selected URLs in page order and skips unchecked or missing links", async () => {
+  const first = "https://example.com/first?a=1&b=2#fragment";
+  const second = "https://example.org/second";
+  const f = await setup("bulk_open_urls", [
+    { checked: false, url: "https://example.com/unchecked" },
+    { checked: true, url: first },
+    { checked: true, url: null },
+    { checked: true, url: second },
+  ]);
+  f.element.onBulkActionChange();
+  const pending = f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.opened, [
+    [first, "_blank", "noopener,noreferrer"],
+    [second, "_blank", "noopener,noreferrer"],
+  ]);
+  await pending;
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+  assert.deepEqual(f.requests, []);
+  assert.deepEqual(f.copied, []);
+});
+
+test("cycle 10: an empty selection opens no tabs and does not submit the form", async () => {
+  const f = await setup("bulk_open_urls", [
+    { checked: false, url: "https://example.com/unchecked" },
+  ]);
+  f.element.onBulkActionChange();
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.opened, []);
+  assert.deepEqual(f.requests, []);
+  assert.deepEqual(f.copied, []);
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+});
