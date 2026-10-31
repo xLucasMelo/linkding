@@ -116,14 +116,29 @@ class BookmarkPage extends HeadlessElement {
 
   onBulkActionChange() {
     this.dataset.bulkAction = this.actionSelect.value;
-    if (this.actionSelect.value === "bulk_copy_urls") {
+    if (
+      this.actionSelect.value === "bulk_copy_urls" ||
+      this.actionSelect.value === "bulk_open_urls"
+    ) {
       this.executeButton.removeAttribute("data-confirm");
     } else {
       this.executeButton.setAttribute("data-confirm", "");
     }
+    this.updateSelectAcross(this.allCheckbox.checked);
   }
 
   async onExecuteBulkAction(event) {
+    if (this.actionSelect.value === "bulk_open_urls") {
+      event.preventDefault();
+      event.stopPropagation();
+      const checkbox = this.bookmarkCheckboxes.find((item) => item.checked);
+      const url = checkbox?.closest("li")?.querySelector(".title > a")?.href;
+      if (url) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+      return;
+    }
+
     if (this.actionSelect.value !== "bulk_copy_urls") {
       return;
     }
@@ -163,7 +178,7 @@ class BookmarkPage extends HeadlessElement {
   }
 
   updateSelectAcross(allChecked) {
-    if (allChecked) {
+    if (allChecked && this.actionSelect.value !== "bulk_open_urls") {
       this.selectAcross.classList.remove("d-none");
     } else {
       this.selectAcross.classList.add("d-none");
