@@ -131,11 +131,7 @@ class BookmarkPage extends HeadlessElement {
     if (this.actionSelect.value === "bulk_open_urls") {
       event.preventDefault();
       event.stopPropagation();
-      const checkbox = this.bookmarkCheckboxes.find((item) => item.checked);
-      const url = checkbox?.closest("li")?.querySelector(".title > a")?.href;
-      if (url) {
-        window.open(url, "_blank", "noopener,noreferrer");
-      }
+      this.openSelectedUrls();
       return;
     }
 
@@ -156,6 +152,14 @@ class BookmarkPage extends HeadlessElement {
     if (response.ok) {
       const urls = await response.text();
       await navigator.clipboard.writeText(urls);
+    }
+  }
+
+  openSelectedUrls() {
+    const checkbox = this.bookmarkCheckboxes.find((item) => item.checked);
+    const url = checkbox?.closest("li")?.querySelector(".title > a")?.href;
+    if (url) {
+      window.open(url, "_blank", "noopener,noreferrer");
     }
   }
 
