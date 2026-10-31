@@ -127,3 +127,26 @@ test("regression: delete retains confirmation and its normal form submission", a
   assert.deepEqual(f.opened, []);
   assert.deepEqual(f.copied, []);
 });
+
+test("cycle 9: opens one selected bookmark synchronously without posting or copying", async () => {
+  const url = "https://example.com/selected?x=1#section";
+  const f = await setup("bulk_open_urls", [
+    { checked: false, url: "https://example.com/not-selected" },
+    { checked: true, url },
+  ]);
+  f.element.onBulkActionChange();
+  const pending = f.element.onExecuteBulkAction(f.event);
+  // Must happen in the click handler, before any asynchronous network work.
+  assert.deepEqual(f.opened, [[url, "_blank", "noopener,noreferrer"]]);
+  await pending;
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+  assert.deepEqual(f.requests, []);
+  assert.deepEqual(f.copied, []);
+  assert.equal(f.confirmation.has("data-confirm"), false);
+  assert.equal(f.acrossCheckbox.checked, false);
+  assert.equal(f.acrossClasses.has("d-none"), true);
+  // Switching back preserves cross-page selection for the existing copy action.
+  f.element.actionSelect.value = "bulk_copy_urls";
+  f.element.onBulkActionChange();
+  assert.equal(f.acrossClasses.has("d-none"), false);
+});
