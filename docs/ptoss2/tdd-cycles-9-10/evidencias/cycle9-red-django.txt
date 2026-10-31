@@ -1,0 +1,12 @@
+Excerto final do log real; a resposta HTML completa permanece no registro local.
+
+=========================== short test summary info ===========================
+FAILED bookmarks/tests/test_bookmark_index_view.py::BookmarkIndexViewTestCase::test_allowed_bulk_actions
+FAILED bookmarks/tests/test_bookmark_index_view.py::BookmarkIndexViewTestCase::test_allowed_bulk_actions_with_html_snapshot_enabled
+FAILED bookmarks/tests/test_bookmark_index_view.py::BookmarkIndexViewTestCase::test_allowed_bulk_actions_with_sharing_and_html_snapshot_enabled
+FAILED bookmarks/tests/test_bookmark_index_view.py::BookmarkIndexViewTestCase::test_allowed_bulk_actions_with_sharing_enabled
+FAILED bookmarks/tests/test_bookmark_archived_view.py::BookmarkArchivedViewTestCase::test_allowed_bulk_actions
+FAILED bookmarks/tests/test_bookmark_archived_view.py::BookmarkArchivedViewTestCase::test_allowed_bulk_actions_with_html_snapshot_enabled
+FAILED bookmarks/tests/test_bookmark_archived_view.py::BookmarkArchivedViewTestCase::test_allowed_bulk_actions_with_sharing_and_html_snapshot_enabled
+FAILED bookmarks/tests/test_bookmark_archived_view.py::BookmarkArchivedViewTestCase::test_allowed_bulk_actions_with_sharing_enabled
+8 failed, 103 deselected in 1.48s

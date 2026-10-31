@@ -1,0 +1,158 @@
+{
+  "baseline": {
+    "frontend": {
+      "tests": 2,
+      "pass": 2,
+      "fail": 0
+    },
+    "django_result": "111 passed in 3.20s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:12:34.262219+00:00",
+    "head_when_run": "9b609342fcdeb98d2dd878f8946d8048cd224928"
+  },
+  "cycle9-red": {
+    "frontend": {
+      "tests": 3,
+      "pass": 2,
+      "fail": 1
+    },
+    "django_result": "8 failed, 103 deselected in 1.48s",
+    "exit_codes": {
+      "frontend": 1,
+      "django": 1
+    },
+    "recorded_at_utc": "2026-10-31T15:12:56.991455+00:00",
+    "head_when_run": "0f4d0dda201a5c09ac9e03ed551d2e5f151cfd6b"
+  },
+  "cycle9-green": {
+    "frontend": {
+      "tests": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "django_result": "8 passed, 103 deselected in 1.17s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:13:21.311117+00:00",
+    "head_when_run": "8b333144575d205e7ed727efa0c6abba2cd1dc19"
+  },
+  "cycle9-refactor": {
+    "frontend": {
+      "tests": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "django_result": "8 passed, 103 deselected in 1.16s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:13:43.520954+00:00",
+    "head_when_run": "83e1c67c0bc87a3437a3a63468ec84f5f6154448"
+  },
+  "cycle10-red": {
+    "frontend": {
+      "tests": 5,
+      "pass": 4,
+      "fail": 1
+    },
+    "django_result": "8 passed, 103 deselected in 1.15s",
+    "exit_codes": {
+      "frontend": 1,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:13:55.170937+00:00",
+    "head_when_run": "33160eb2471933164519860cc81ca3ed51d67db8"
+  },
+  "cycle10-green": {
+    "frontend": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "django_result": "8 passed, 103 deselected in 1.27s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:14:04.377957+00:00",
+    "head_when_run": "21316ec01114fb58faa85f5a22e7546f8ea5e9ea"
+  },
+  "cycle10-refactor": {
+    "frontend": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "django_result": "8 passed, 103 deselected in 1.34s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:14:19.175659+00:00",
+    "head_when_run": "7e37de10f687eecc0359d33a6b8691d3f576583a"
+  },
+  "final": {
+    "frontend": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "django_result": "111 passed in 3.13s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:14:24.017585+00:00",
+    "head_when_run": "735585ae051c63d3fcdc7664bc01e6f71dfb4536"
+  },
+  "commits": [
+    {
+      "sha": "735585ae051c63d3fcdc7664bc01e6f71dfb4536",
+      "subject": "refactor(tdd10): separate selected URLs from tab opening and share event handling"
+    },
+    {
+      "sha": "7e37de10f687eecc0359d33a6b8691d3f576583a",
+      "subject": "feat(tdd10): GREEN for opening every selected URL in page order"
+    },
+    {
+      "sha": "21316ec01114fb58faa85f5a22e7546f8ea5e9ea",
+      "subject": "test(tdd10): RED for multiple selected URLs and an empty selection"
+    },
+    {
+      "sha": "33160eb2471933164519860cc81ca3ed51d67db8",
+      "subject": "refactor(tdd9): extract URL opening from the bulk-action handler"
+    },
+    {
+      "sha": "83e1c67c0bc87a3437a3a63468ec84f5f6154448",
+      "subject": "feat(tdd9): GREEN for opening one selected bookmark on the current page"
+    },
+    {
+      "sha": "8b333144575d205e7ed727efa0c6abba2cd1dc19",
+      "subject": "test(tdd9): RED for opening a selected bookmark and exposing the menu action"
+    },
+    {
+      "sha": "0f4d0dda201a5c09ac9e03ed551d2e5f151cfd6b",
+      "subject": "test: establish bulk-action baseline for TDD cycles 9 and 10"
+    }
+  ],
+  "final-formatted": {
+    "frontend": {
+      "tests": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "django_result": "111 passed in 3.03s",
+    "exit_codes": {
+      "frontend": 0,
+      "django": 0
+    },
+    "recorded_at_utc": "2026-10-31T15:17:48.371812+00:00",
+    "head_when_run": "735585ae051c63d3fcdc7664bc01e6f71dfb4536"
+  }
+}
