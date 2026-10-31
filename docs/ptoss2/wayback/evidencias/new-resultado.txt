@@ -1,0 +1,8 @@
+Phase: new; pytest bookmarks/tests/test_wayback.py -q --tb=short --color=no
+.uu.uuuu..uuu...uuu.....                                                 [100%]
+12 passed, 12 subtests passed in 2.88s
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+bookmarks\services\wayback.py       8      0      4      0   100%
+---------------------------------------------------------------------------
+TOTAL                               8      0      4      0   100%

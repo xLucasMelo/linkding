@@ -1,0 +1,34 @@
+Excertos dos logs reais. Caminhos locais de arquivos temporarios foram ocultados.
+
+EXECUCAO: baseline
+______ ERROR at teardown of MonolithServiceTestCase.test_create_snapshot ______
+bookmarks\tests\test_monolith_service.py:20: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: 'temp.html.gz.tmp'
+________________ MonolithServiceTestCase.test_create_snapshot _________________
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: 'temp.html.gz.tmp'
+________ SingleFileServiceTestCase.test_create_snapshot_custom_options ________
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+____ SingleFileServiceTestCase.test_create_snapshot_custom_timeout_setting ____
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+___ SingleFileServiceTestCase.test_create_snapshot_default_timeout_setting ____
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+________ SingleFileServiceTestCase.test_create_snapshot_empty_options _________
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+
+EXECUCAO: combined
+________ SingleFileServiceTestCase.test_create_snapshot_custom_options ________
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+____ SingleFileServiceTestCase.test_create_snapshot_custom_timeout_setting ____
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+___ SingleFileServiceTestCase.test_create_snapshot_default_timeout_setting ____
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]
+________ SingleFileServiceTestCase.test_create_snapshot_empty_options _________
+bookmarks\tests\test_singlefile_service.py:17: in tearDown
+E   PermissionError: [WinError 32] O arquivo já está sendo usado por outro processo: [caminho temporario local ocultado]

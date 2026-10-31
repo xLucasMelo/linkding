@@ -1,0 +1,13 @@
+=========================== short test summary info ===========================
+FAILED bookmarks/tests/test_monolith_service.py::MonolithServiceTestCase::test_create_snapshot
+FAILED bookmarks/tests/test_singlefile_service.py::SingleFileServiceTestCase::test_create_snapshot_custom_options
+FAILED bookmarks/tests/test_singlefile_service.py::SingleFileServiceTestCase::test_create_snapshot_custom_timeout_setting
+FAILED bookmarks/tests/test_singlefile_service.py::SingleFileServiceTestCase::test_create_snapshot_default_timeout_setting
+FAILED bookmarks/tests/test_singlefile_service.py::SingleFileServiceTestCase::test_create_snapshot_empty_options
+ERROR bookmarks/tests/test_monolith_service.py::MonolithServiceTestCase::test_create_snapshot
+5 failed, 1295 passed, 1 error, 58 subtests passed in 110.46s (0:01:50)
+Name                            Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------
+bookmarks\services\wayback.py       8      2      4      2    67%   16, 18
+---------------------------------------------------------------------------
+TOTAL                               8      2      4      2    67%
