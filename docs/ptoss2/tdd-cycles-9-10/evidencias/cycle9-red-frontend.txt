@@ -1,0 +1,58 @@
+TAP version 13
+# (node:19336) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node.EXE --trace-warnings ...` to show where the warning was created)
+# Subtest: regression: copying URLs still posts the form and writes the clipboard
+ok 1 - regression: copying URLs still posts the form and writes the clipboard
+  ---
+  duration_ms: 2.406
+  type: 'test'
+  ...
+# Subtest: regression: delete retains confirmation and its normal form submission
+ok 2 - regression: delete retains confirmation and its normal form submission
+  ---
+  duration_ms: 1.4529
+  type: 'test'
+  ...
+# Subtest: cycle 9: opens one selected bookmark synchronously without posting or copying
+not ok 3 - cycle 9: opens one selected bookmark synchronously without posting or copying
+  ---
+  duration_ms: 1.803
+  type: 'test'
+  location: '<repo>\\bookmarks\\frontend\\tests\\bookmark-page.test.cjs:131:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+    + []
+    - [
+    -   [
+    -     'https://example.com/selected?x=1#section',
+    -     '_blank',
+    -     'noopener,noreferrer'
+    -   ]
+    - ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'https://example.com/selected?x=1#section'
+      1: '_blank'
+      2: 'noopener,noreferrer'
+  actual:
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (<repo>\bookmarks\frontend\tests\bookmark-page.test.cjs:140:10)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 2
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 378.0235
