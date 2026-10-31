@@ -157,7 +157,9 @@ class BookmarkPage extends HeadlessElement {
   getSelectedBookmarkUrls() {
     return this.bookmarkCheckboxes
       .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.closest("li")?.querySelector(".title > a")?.href)
+      .map(
+        (checkbox) => checkbox.closest("li")?.querySelector(".title > a")?.href,
+      )
       .filter(Boolean);
   }
 
