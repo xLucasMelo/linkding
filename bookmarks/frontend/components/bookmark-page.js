@@ -128,19 +128,18 @@ class BookmarkPage extends HeadlessElement {
   }
 
   async onExecuteBulkAction(event) {
-    if (this.actionSelect.value === "bulk_open_urls") {
-      event.preventDefault();
-      event.stopPropagation();
-      this.openSelectedUrls();
-      return;
-    }
-
-    if (this.actionSelect.value !== "bulk_copy_urls") {
+    const action = this.actionSelect.value;
+    if (action !== "bulk_copy_urls" && action !== "bulk_open_urls") {
       return;
     }
 
     event.preventDefault();
     event.stopPropagation();
+
+    if (action === "bulk_open_urls") {
+      this.openSelectedUrls();
+      return;
+    }
 
     const form = this.executeButton.closest("form");
     const formData = new FormData(form, this.executeButton);
@@ -155,16 +154,17 @@ class BookmarkPage extends HeadlessElement {
     }
   }
 
+  getSelectedBookmarkUrls() {
+    return this.bookmarkCheckboxes
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.closest("li")?.querySelector(".title > a")?.href)
+      .filter(Boolean);
+  }
+
   openSelectedUrls() {
-    for (const checkbox of this.bookmarkCheckboxes) {
-      if (!checkbox.checked) {
-        continue;
-      }
-      const url = checkbox.closest("li")?.querySelector(".title > a")?.href;
-      if (url) {
-        window.open(url, "_blank", "noopener,noreferrer");
-      }
-    }
+    this.getSelectedBookmarkUrls().forEach((url) => {
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
   }
 
   onToggleAll() {
