@@ -156,10 +156,14 @@ class BookmarkPage extends HeadlessElement {
   }
 
   openSelectedUrls() {
-    const checkbox = this.bookmarkCheckboxes.find((item) => item.checked);
-    const url = checkbox?.closest("li")?.querySelector(".title > a")?.href;
-    if (url) {
-      window.open(url, "_blank", "noopener,noreferrer");
+    for (const checkbox of this.bookmarkCheckboxes) {
+      if (!checkbox.checked) {
+        continue;
+      }
+      const url = checkbox.closest("li")?.querySelector(".title > a")?.href;
+      if (url) {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
     }
   }
 
