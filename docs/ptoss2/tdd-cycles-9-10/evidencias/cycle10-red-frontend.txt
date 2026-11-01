@@ -1,0 +1,82 @@
+TAP version 13
+# (node:5176) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node.EXE --trace-warnings ...` to show where the warning was created)
+# Subtest: regression: copying URLs still posts the form and writes the clipboard
+ok 1 - regression: copying URLs still posts the form and writes the clipboard
+  ---
+  duration_ms: 2.9836
+  type: 'test'
+  ...
+# Subtest: regression: delete retains confirmation and its normal form submission
+ok 2 - regression: delete retains confirmation and its normal form submission
+  ---
+  duration_ms: 1.7821
+  type: 'test'
+  ...
+# Subtest: cycle 9: opens one selected bookmark synchronously without posting or copying
+ok 3 - cycle 9: opens one selected bookmark synchronously without posting or copying
+  ---
+  duration_ms: 1.2902
+  type: 'test'
+  ...
+# Subtest: cycle 10: opens all selected URLs in page order and skips unchecked or missing links
+not ok 4 - cycle 10: opens all selected URLs in page order and skips unchecked or missing links
+  ---
+  duration_ms: 2.0005
+  type: 'test'
+  location: '<repo>\\bookmarks\\frontend\\tests\\bookmark-page.test.cjs:154:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+
+      [
+        [
+          'https://example.com/first?a=1&b=2#fragment',
+          '_blank',
+          'noopener,noreferrer'
+        ],
+    -   [
+    -     'https://example.org/second',
+    -     '_blank',
+    -     'noopener,noreferrer'
+    -   ]
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 'https://example.com/first?a=1&b=2#fragment'
+      1: '_blank'
+      2: 'noopener,noreferrer'
+    1:
+      0: 'https://example.org/second'
+      1: '_blank'
+      2: 'noopener,noreferrer'
+  actual:
+    0:
+      0: 'https://example.com/first?a=1&b=2#fragment'
+      1: '_blank'
+      2: 'noopener,noreferrer'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (<repo>\bookmarks\frontend\tests\bookmark-page.test.cjs:165:10)
+    async Test.run (node:internal/test_runner/test:1409:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+  ...
+# Subtest: cycle 10: an empty selection opens no tabs and does not submit the form
+ok 5 - cycle 10: an empty selection opens no tabs and does not submit the form
+  ---
+  duration_ms: 1.0441
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 4
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 227.9555

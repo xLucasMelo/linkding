@@ -1,0 +1,7 @@
+
+> build-js
+> rollup -c
+
+
+bookmarks/frontend/index.js → bookmarks/static/bundle.js...
+created bookmarks/static/bundle.js in 1.1s

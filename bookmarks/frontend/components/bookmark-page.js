@@ -116,20 +116,30 @@ class BookmarkPage extends HeadlessElement {
 
   onBulkActionChange() {
     this.dataset.bulkAction = this.actionSelect.value;
-    if (this.actionSelect.value === "bulk_copy_urls") {
+    if (
+      this.actionSelect.value === "bulk_copy_urls" ||
+      this.actionSelect.value === "bulk_open_urls"
+    ) {
       this.executeButton.removeAttribute("data-confirm");
     } else {
       this.executeButton.setAttribute("data-confirm", "");
     }
+    this.updateSelectAcross(this.allCheckbox.checked);
   }
 
   async onExecuteBulkAction(event) {
-    if (this.actionSelect.value !== "bulk_copy_urls") {
+    const action = this.actionSelect.value;
+    if (action !== "bulk_copy_urls" && action !== "bulk_open_urls") {
       return;
     }
 
     event.preventDefault();
     event.stopPropagation();
+
+    if (action === "bulk_open_urls") {
+      this.openSelectedUrls();
+      return;
+    }
 
     const form = this.executeButton.closest("form");
     const formData = new FormData(form, this.executeButton);
@@ -142,6 +152,21 @@ class BookmarkPage extends HeadlessElement {
       const urls = await response.text();
       await navigator.clipboard.writeText(urls);
     }
+  }
+
+  getSelectedBookmarkUrls() {
+    return this.bookmarkCheckboxes
+      .filter((checkbox) => checkbox.checked)
+      .map(
+        (checkbox) => checkbox.closest("li")?.querySelector(".title > a")?.href,
+      )
+      .filter(Boolean);
+  }
+
+  openSelectedUrls() {
+    this.getSelectedBookmarkUrls().forEach((url) => {
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
   }
 
   onToggleAll() {
@@ -163,7 +188,7 @@ class BookmarkPage extends HeadlessElement {
   }
 
   updateSelectAcross(allChecked) {
-    if (allChecked) {
+    if (allChecked && this.actionSelect.value !== "bulk_open_urls") {
       this.selectAcross.classList.remove("d-none");
     } else {
       this.selectAcross.classList.add("d-none");

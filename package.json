@@ -1,6 +1,7 @@
 {
   "name": "linkding",
   "scripts": {
+    "test:bulk-actions": "node --experimental-vm-modules --test-reporter=tap --test bookmarks/frontend/tests/bookmark-page.test.cjs",
     "build": "npm run build-js && npm run build-theme-light && npm run build-theme-dark",
     "build-js": "rollup -c",
     "build-theme-light": "postcss -o bookmarks/static/theme-light.css bookmarks/styles/theme-light.css",

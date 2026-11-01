@@ -1,0 +1,42 @@
+TAP version 13
+# (node:50816) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node.EXE --trace-warnings ...` to show where the warning was created)
+# Subtest: regression: copying URLs still posts the form and writes the clipboard
+ok 1 - regression: copying URLs still posts the form and writes the clipboard
+  ---
+  duration_ms: 3.6936
+  type: 'test'
+  ...
+# Subtest: regression: delete retains confirmation and its normal form submission
+ok 2 - regression: delete retains confirmation and its normal form submission
+  ---
+  duration_ms: 2.286
+  type: 'test'
+  ...
+# Subtest: cycle 9: opens one selected bookmark synchronously without posting or copying
+ok 3 - cycle 9: opens one selected bookmark synchronously without posting or copying
+  ---
+  duration_ms: 1.2487
+  type: 'test'
+  ...
+# Subtest: cycle 10: opens all selected URLs in page order and skips unchecked or missing links
+ok 4 - cycle 10: opens all selected URLs in page order and skips unchecked or missing links
+  ---
+  duration_ms: 1.1982
+  type: 'test'
+  ...
+# Subtest: cycle 10: an empty selection opens no tabs and does not submit the form
+ok 5 - cycle 10: an empty selection opens no tabs and does not submit the form
+  ---
+  duration_ms: 1.235
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.9758
