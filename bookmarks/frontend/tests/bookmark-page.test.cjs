@@ -10,6 +10,8 @@ async function setup(action, bookmarks = []) {
   const opened = [];
   const copied = [];
   const requests = [];
+  const confirmCalls = [];
+  let confirmResult = true;
   const confirmation = new Map([["data-confirm", ""]]);
   const acrossClasses = new Set();
   const acrossCheckbox = { checked: true };
@@ -22,7 +24,10 @@ async function setup(action, bookmarks = []) {
         Component = value;
       },
     },
-    window: { open: (...args) => opened.push(args) },
+    window: {
+      open: (...args) => opened.push(args),
+      confirm: (msg) => { confirmCalls.push(msg); return confirmResult; },
+    },
     navigator: { clipboard: { writeText: async (text) => copied.push(text) } },
     FormData: class {
       constructor(owner, submitter) {
@@ -94,6 +99,8 @@ async function setup(action, bookmarks = []) {
     opened,
     copied,
     requests,
+    confirmCalls,
+    setConfirmResult: (v) => { confirmResult = v; },
     confirmation,
     acrossCheckbox,
     acrossClasses,
@@ -182,4 +189,33 @@ test("cycle 10: an empty selection opens no tabs and does not submit the form", 
   assert.deepEqual(f.requests, []);
   assert.deepEqual(f.copied, []);
   assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+});
+
+test("cycle 11: confirms before opening multiple URLs and shows count in message", async () => {
+  const urls = [
+    "https://example.com/a",
+    "https://example.com/b",
+    "https://example.com/c",
+  ];
+  const f = await setup(
+    "bulk_open_urls",
+    urls.map((url) => ({ checked: true, url })),
+  );
+  f.element.onBulkActionChange();
+  f.setConfirmResult(true);
+  await f.element.onExecuteBulkAction(f.event);
+  // Must have called window.confirm exactly once with the URL count
+  assert.equal(f.confirmCalls.length, 1);
+  assert.ok(
+    f.confirmCalls[0].includes("3"),
+    `confirm message should contain the count 3, got: "${f.confirmCalls[0]}"`,
+  );
+  // After confirming, all tabs must be opened
+  assert.equal(f.opened.length, 3);
+  assert.deepEqual(f.opened[0], [urls[0], "_blank", "noopener,noreferrer"]);
+  assert.deepEqual(f.opened[1], [urls[1], "_blank", "noopener,noreferrer"]);
+  assert.deepEqual(f.opened[2], [urls[2], "_blank", "noopener,noreferrer"]);
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+  assert.deepEqual(f.requests, []);
+  assert.deepEqual(f.copied, []);
 });
