@@ -164,7 +164,16 @@ class BookmarkPage extends HeadlessElement {
   }
 
   openSelectedUrls() {
-    this.getSelectedBookmarkUrls().forEach((url) => {
+    const urls = this.getSelectedBookmarkUrls();
+    if (urls.length > 1) {
+      const confirmed = window.confirm(
+        `Open ${urls.length} tabs?`,
+      );
+      if (!confirmed) {
+        return;
+      }
+    }
+    urls.forEach((url) => {
       window.open(url, "_blank", "noopener,noreferrer");
     });
   }
