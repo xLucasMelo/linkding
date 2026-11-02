@@ -219,3 +219,42 @@ test("cycle 11: confirms before opening multiple URLs and shows count in message
   assert.deepEqual(f.requests, []);
   assert.deepEqual(f.copied, []);
 });
+
+test("cycle 12: cancelling the confirmation opens no tabs and returns zero", async () => {
+  const f = await setup("bulk_open_urls", [
+    { checked: true, url: "https://example.com/a" },
+    { checked: true, url: "https://example.com/b" },
+    { checked: true, url: "https://example.com/c" },
+  ]);
+  f.element.onBulkActionChange();
+  f.setConfirmResult(false);
+  await f.element.onExecuteBulkAction(f.event);
+  // Confirm was called but user declined
+  assert.equal(f.confirmCalls.length, 1);
+  assert.ok(f.confirmCalls[0].includes("3"));
+  // No tabs should have been opened
+  assert.deepEqual(f.opened, []);
+  // openSelectedUrls must return the count of tabs actually opened
+  const count = f.element.openSelectedUrls();
+  assert.equal(count, 0);
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+  assert.deepEqual(f.requests, []);
+  assert.deepEqual(f.copied, []);
+});
+
+test("cycle 12: a single selected URL opens directly without confirmation and returns 1", async () => {
+  const url = "https://example.com/single";
+  const f = await setup("bulk_open_urls", [
+    { checked: true, url },
+    { checked: false, url: "https://example.com/unchecked" },
+  ]);
+  f.element.onBulkActionChange();
+  // Must return the count of opened tabs
+  const count = f.element.openSelectedUrls();
+  assert.equal(count, 1);
+  // No confirmation dialog should appear for a single URL
+  assert.equal(f.confirmCalls.length, 0);
+  // The single URL must still be opened
+  assert.equal(f.opened.length, 1);
+  assert.deepEqual(f.opened[0], [url, "_blank", "noopener,noreferrer"]);
+});
