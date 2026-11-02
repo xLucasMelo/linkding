@@ -163,15 +163,17 @@ class BookmarkPage extends HeadlessElement {
       .filter(Boolean);
   }
 
+  shouldProceedWithOpen(urls) {
+    if (urls.length > 1) {
+      return window.confirm(`Open ${urls.length} tabs?`);
+    }
+    return true;
+  }
+
   openSelectedUrls() {
     const urls = this.getSelectedBookmarkUrls();
-    if (urls.length > 1) {
-      const confirmed = window.confirm(
-        `Open ${urls.length} tabs?`,
-      );
-      if (!confirmed) {
-        return;
-      }
+    if (!this.shouldProceedWithOpen(urls)) {
+      return;
     }
     urls.forEach((url) => {
       window.open(url, "_blank", "noopener,noreferrer");
