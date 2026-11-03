@@ -141,17 +141,36 @@ class BookmarkPage extends HeadlessElement {
       return;
     }
 
+    await this.copySelectedUrls();
+  }
+
+  async copySelectedUrls() {
     const form = this.executeButton.closest("form");
-    const formData = new FormData(form, this.executeButton);
+    let urls;
+    try {
+      urls = await this.fetchSelectedUrls(form);
+    } catch {
+      window.alert("Could not load URLs. Please try again.");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(urls);
+    } catch {
+      window.alert(
+        "Could not copy URLs to the clipboard. Check clipboard permissions and try again.",
+      );
+    }
+  }
+
+  async fetchSelectedUrls(form) {
     const response = await fetch(form.action, {
       method: "POST",
-      body: formData,
+      body: new FormData(form, this.executeButton),
     });
-
-    if (response.ok) {
-      const urls = await response.text();
-      await navigator.clipboard.writeText(urls);
+    if (!response.ok) {
+      throw new Error(`URL request failed (${response.status})`);
     }
+    return response.text();
   }
 
   getSelectedBookmarkUrls() {
