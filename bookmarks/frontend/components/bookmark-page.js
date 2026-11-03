@@ -173,11 +173,12 @@ class BookmarkPage extends HeadlessElement {
   openSelectedUrls() {
     const urls = this.getSelectedBookmarkUrls();
     if (!this.shouldProceedWithOpen(urls)) {
-      return;
+      return 0;
     }
     urls.forEach((url) => {
       window.open(url, "_blank", "noopener,noreferrer");
     });
+    return urls.length;
   }
 
   onToggleAll() {
