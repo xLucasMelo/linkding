@@ -163,13 +163,25 @@ class BookmarkPage extends HeadlessElement {
       .filter(Boolean);
   }
 
+  /**
+   * Prompts for confirmation before opening multiple tabs.
+   * Single URL or empty selection proceeds without confirmation.
+   *
+   * @param {string[]} urls
+   * @returns {boolean}
+   */
   shouldProceedWithOpen(urls) {
-    if (urls.length > 1) {
-      return window.confirm(`Open ${urls.length} tabs?`);
+    if (urls.length <= 1) {
+      return true;
     }
-    return true;
+    return window.confirm(`Open ${urls.length} tabs?`);
   }
 
+  /**
+   * Opens all selected bookmarks in new tabs and returns the count of opened tabs.
+   *
+   * @returns {number} The count of opened tabs.
+   */
   openSelectedUrls() {
     const urls = this.getSelectedBookmarkUrls();
     if (!this.shouldProceedWithOpen(urls)) {
