@@ -149,7 +149,13 @@ class BookmarkPage extends HeadlessElement {
       window.alert("Could not load URLs. Please try again.");
       return;
     }
-    await navigator.clipboard.writeText(urls);
+    try {
+      await navigator.clipboard.writeText(urls);
+    } catch {
+      window.alert(
+        "Could not copy URLs to the clipboard. Check clipboard permissions and try again.",
+      );
+    }
   }
 
   async fetchSelectedUrls(form) {
