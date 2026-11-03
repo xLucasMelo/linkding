@@ -12,7 +12,15 @@ async function setup(action, bookmarks = []) {
   const requests = [];
   const confirmCalls = [];
   const alerts = [];
-  const failures = { status: 200, fetch: null, read: null };
+  const failures = { status: 200, fetch: null, read: null, clipboard: null };
+  const browserNavigator = {
+    clipboard: {
+      writeText: async (text) => {
+        if (failures.clipboard) throw failures.clipboard;
+        copied.push(text);
+      },
+    },
+  };
   let confirmResult = true;
   const confirmation = new Map([["data-confirm", ""]]);
   const acrossClasses = new Set();
@@ -34,7 +42,7 @@ async function setup(action, bookmarks = []) {
         return confirmResult;
       },
     },
-    navigator: { clipboard: { writeText: async (text) => copied.push(text) } },
+    navigator: browserNavigator,
     FormData: class {
       constructor(owner, submitter) {
         this.owner = owner;
@@ -116,6 +124,7 @@ async function setup(action, bookmarks = []) {
     confirmCalls,
     alerts,
     failures,
+    browserNavigator,
     setConfirmResult: (v) => {
       confirmResult = v;
     },
@@ -309,4 +318,33 @@ test("supplemental cycle 7: a failed response body read does not reach the clipb
   assert.deepEqual(f.alerts, ["Could not load URLs. Please try again."]);
   assert.deepEqual(f.copied, []);
   assert.deepEqual(f.opened, []);
+});
+
+test("supplemental cycle 8: denied clipboard permission is handled and a later retry can copy", async () => {
+  const f = await setup("bulk_copy_urls");
+  f.failures.clipboard = new Error("NotAllowedError");
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.alerts, [
+    "Could not copy URLs to the clipboard. Check clipboard permissions and try again.",
+  ]);
+  assert.deepEqual(f.copied, []);
+  assert.deepEqual(f.opened, []);
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+  f.failures.clipboard = null;
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.copied, ["https://example.com/copied"]);
+  assert.equal(f.alerts.length, 1);
+  assert.equal(f.requests.length, 2);
+});
+
+test("supplemental cycle 8: an unavailable clipboard API produces an actionable message", async () => {
+  const f = await setup("bulk_copy_urls");
+  f.browserNavigator.clipboard = undefined;
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.alerts, [
+    "Could not copy URLs to the clipboard. Check clipboard permissions and try again.",
+  ]);
+  assert.deepEqual(f.copied, []);
+  assert.deepEqual(f.opened, []);
+  assert.equal(f.requests.length, 1);
 });
