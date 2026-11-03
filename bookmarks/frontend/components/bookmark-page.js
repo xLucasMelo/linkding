@@ -141,6 +141,10 @@ class BookmarkPage extends HeadlessElement {
       return;
     }
 
+    await this.copySelectedUrls();
+  }
+
+  async copySelectedUrls() {
     const form = this.executeButton.closest("form");
     let urls;
     try {
