@@ -26,7 +26,10 @@ async function setup(action, bookmarks = []) {
     },
     window: {
       open: (...args) => opened.push(args),
-      confirm: (msg) => { confirmCalls.push(msg); return confirmResult; },
+      confirm: (msg) => {
+        confirmCalls.push(msg);
+        return confirmResult;
+      },
     },
     navigator: { clipboard: { writeText: async (text) => copied.push(text) } },
     FormData: class {
@@ -100,7 +103,9 @@ async function setup(action, bookmarks = []) {
     copied,
     requests,
     confirmCalls,
-    setConfirmResult: (v) => { confirmResult = v; },
+    setConfirmResult: (v) => {
+      confirmResult = v;
+    },
     confirmation,
     acrossCheckbox,
     acrossClasses,
