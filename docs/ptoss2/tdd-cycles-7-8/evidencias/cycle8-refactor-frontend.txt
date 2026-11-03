@@ -1,0 +1,90 @@
+TAP version 13
+# (node:20280) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+# (Use `node.EXE --trace-warnings ...` to show where the warning was created)
+# Subtest: regression: copying URLs still posts the form and writes the clipboard
+ok 1 - regression: copying URLs still posts the form and writes the clipboard
+  ---
+  duration_ms: 4.7202
+  type: 'test'
+  ...
+# Subtest: regression: delete retains confirmation and its normal form submission
+ok 2 - regression: delete retains confirmation and its normal form submission
+  ---
+  duration_ms: 1.8323
+  type: 'test'
+  ...
+# Subtest: cycle 9: opens one selected bookmark synchronously without posting or copying
+ok 3 - cycle 9: opens one selected bookmark synchronously without posting or copying
+  ---
+  duration_ms: 2.3247
+  type: 'test'
+  ...
+# Subtest: cycle 10: opens all selected URLs in page order and skips unchecked or missing links
+ok 4 - cycle 10: opens all selected URLs in page order and skips unchecked or missing links
+  ---
+  duration_ms: 1.9294
+  type: 'test'
+  ...
+# Subtest: cycle 10: an empty selection opens no tabs and does not submit the form
+ok 5 - cycle 10: an empty selection opens no tabs and does not submit the form
+  ---
+  duration_ms: 1.2878
+  type: 'test'
+  ...
+# Subtest: cycle 11: confirms before opening multiple URLs and shows count in message
+ok 6 - cycle 11: confirms before opening multiple URLs and shows count in message
+  ---
+  duration_ms: 2.8975
+  type: 'test'
+  ...
+# Subtest: cycle 12: cancelling the confirmation opens no tabs and returns zero
+ok 7 - cycle 12: cancelling the confirmation opens no tabs and returns zero
+  ---
+  duration_ms: 1.3966
+  type: 'test'
+  ...
+# Subtest: cycle 12: a single selected URL opens directly without confirmation and returns 1
+ok 8 - cycle 12: a single selected URL opens directly without confirmation and returns 1
+  ---
+  duration_ms: 1.2951
+  type: 'test'
+  ...
+# Subtest: supplemental cycle 7: an HTTP error notifies the user without copying the error body
+ok 9 - supplemental cycle 7: an HTTP error notifies the user without copying the error body
+  ---
+  duration_ms: 1.4823
+  type: 'test'
+  ...
+# Subtest: supplemental cycle 7: a network rejection is handled and a later retry can copy
+ok 10 - supplemental cycle 7: a network rejection is handled and a later retry can copy
+  ---
+  duration_ms: 1.5874
+  type: 'test'
+  ...
+# Subtest: supplemental cycle 7: a failed response body read does not reach the clipboard
+ok 11 - supplemental cycle 7: a failed response body read does not reach the clipboard
+  ---
+  duration_ms: 1.1817
+  type: 'test'
+  ...
+# Subtest: supplemental cycle 8: denied clipboard permission is handled and a later retry can copy
+ok 12 - supplemental cycle 8: denied clipboard permission is handled and a later retry can copy
+  ---
+  duration_ms: 1.2848
+  type: 'test'
+  ...
+# Subtest: supplemental cycle 8: an unavailable clipboard API produces an actionable message
+ok 13 - supplemental cycle 8: an unavailable clipboard API produces an actionable message
+  ---
+  duration_ms: 1.224
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 667.5795

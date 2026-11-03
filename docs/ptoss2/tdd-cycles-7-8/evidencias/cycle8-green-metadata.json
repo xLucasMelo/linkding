@@ -1,0 +1,27 @@
+{
+  "phase": "cycle8-green",
+  "recorded_at_utc": "2026-11-03T01:43:12.031864+00:00",
+  "git_head": "d5815c2c37424793715387691671b138fa35315e",
+  "python": "3.13.16 (main, Oct  3 2026, 01:04:41) [MSC v.1944 64 bit (AMD64)]",
+  "node": "v24.22.1",
+  "versions": {
+    "Django": "6.1.2",
+    "pytest": "9.1.1",
+    "pytest-django": "4.14.0"
+  },
+  "suite": "menu",
+  "test_settings": "SQLite in-memory; temporary Huey file; MD5 hasher (test process only)",
+  "log_note": "Actual subprocess output; repository-root paths replaced with <repo>.",
+  "sha256": {
+    "bookmarks/frontend/components/bookmark-page.js": "498d16c0f43cfa93c937983cb1901dc22fdd5f5fb6d66bc7af1b8315176bf0a2",
+    "bookmarks/frontend/tests/bookmark-page.test.cjs": "9ff775481991cca27b3080de89ed7f2a6d85b795993fecaa9a446373d63270e5",
+    "bookmarks/templates/bookmarks/bulk_edit_bar.html": "5e9fbbd1d58f340d13933f486d4a2f3b708192283d009d9d8fc3b795e0181303",
+    "bookmarks/tests/test_bookmark_action_view.py": "9b826c20eae7a803d47e90de7b87fb99654447253d7521b6c48fb5dbc5d30627",
+    "bookmarks/tests/test_bookmark_index_view.py": "abf980bc916faf2745525f34644e709356902ef928689222c89986631e8ee55a",
+    "bookmarks/tests/test_bookmark_archived_view.py": "b012b68a4535f5aba0902ec769fd737914f78688a63d7e926ca237420eb43a06"
+  },
+  "exit_codes": {
+    "frontend": 0,
+    "django": 0
+  }
+}
