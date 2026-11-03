@@ -11,6 +11,8 @@ async function setup(action, bookmarks = []) {
   const copied = [];
   const requests = [];
   const confirmCalls = [];
+  const alerts = [];
+  const failures = { status: 200, fetch: null, read: null };
   let confirmResult = true;
   const confirmation = new Map([["data-confirm", ""]]);
   const acrossClasses = new Set();
@@ -26,6 +28,7 @@ async function setup(action, bookmarks = []) {
     },
     window: {
       open: (...args) => opened.push(args),
+      alert: (message) => alerts.push(message),
       confirm: (msg) => {
         confirmCalls.push(msg);
         return confirmResult;
@@ -40,7 +43,15 @@ async function setup(action, bookmarks = []) {
     },
     fetch: async (...args) => {
       requests.push(args);
-      return { ok: true, text: async () => "https://example.com/copied" };
+      if (failures.fetch) throw failures.fetch;
+      return {
+        ok: failures.status >= 200 && failures.status < 300,
+        status: failures.status,
+        text: async () => {
+          if (failures.read) throw failures.read;
+          return "https://example.com/copied";
+        },
+      };
     },
   });
   const filename = path.join(__dirname, "../components/bookmark-page.js");
@@ -103,6 +114,8 @@ async function setup(action, bookmarks = []) {
     copied,
     requests,
     confirmCalls,
+    alerts,
+    failures,
     setConfirmResult: (v) => {
       confirmResult = v;
     },
@@ -262,4 +275,38 @@ test("cycle 12: a single selected URL opens directly without confirmation and re
   // The single URL must still be opened
   assert.equal(f.opened.length, 1);
   assert.deepEqual(f.opened[0], [url, "_blank", "noopener,noreferrer"]);
+});
+
+test("supplemental cycle 7: an HTTP error notifies the user without copying the error body", async () => {
+  const f = await setup("bulk_copy_urls");
+  f.failures.status = 500;
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.alerts, ["Could not load URLs. Please try again."]);
+  assert.deepEqual(f.copied, []);
+  assert.deepEqual(f.opened, []);
+  assert.equal(f.requests.length, 1);
+  assert.deepEqual(f.events, { prevented: 1, stopped: 1 });
+});
+
+test("supplemental cycle 7: a network rejection is handled and a later retry can copy", async () => {
+  const f = await setup("bulk_copy_urls");
+  f.failures.fetch = new Error("Network unavailable");
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.alerts, ["Could not load URLs. Please try again."]);
+  assert.deepEqual(f.copied, []);
+  f.failures.fetch = null;
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.copied, ["https://example.com/copied"]);
+  assert.equal(f.alerts.length, 1);
+  assert.equal(f.requests.length, 2);
+  assert.deepEqual(f.opened, []);
+});
+
+test("supplemental cycle 7: a failed response body read does not reach the clipboard", async () => {
+  const f = await setup("bulk_copy_urls");
+  f.failures.read = new Error("Response interrupted");
+  await f.element.onExecuteBulkAction(f.event);
+  assert.deepEqual(f.alerts, ["Could not load URLs. Please try again."]);
+  assert.deepEqual(f.copied, []);
+  assert.deepEqual(f.opened, []);
 });
