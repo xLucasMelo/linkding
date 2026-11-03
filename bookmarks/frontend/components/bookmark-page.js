@@ -143,15 +143,22 @@ class BookmarkPage extends HeadlessElement {
 
     const form = this.executeButton.closest("form");
     const formData = new FormData(form, this.executeButton);
-    const response = await fetch(form.action, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (response.ok) {
-      const urls = await response.text();
-      await navigator.clipboard.writeText(urls);
+    let urls;
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        window.alert("Could not load URLs. Please try again.");
+        return;
+      }
+      urls = await response.text();
+    } catch {
+      window.alert("Could not load URLs. Please try again.");
+      return;
     }
+    await navigator.clipboard.writeText(urls);
   }
 
   getSelectedBookmarkUrls() {
